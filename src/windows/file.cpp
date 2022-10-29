@@ -55,7 +55,6 @@ void File::save_ram(QWidget* parent, et3400emu* emu_ptr) {
 
     static const int BLOCK_SIZE = 16;
     int bytecount = 16;
-    int i = 0;
     int address = 0;
 
     while (address <= ram->get_end()) {

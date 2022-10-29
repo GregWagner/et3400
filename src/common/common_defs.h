@@ -1,6 +1,6 @@
 #ifndef COMMON_DEFS_H
 #define COMMON_DEFS_H
-#include <stdint.h>
+#include <cstdint>
 
 using offs_t = uint32_t;
 
