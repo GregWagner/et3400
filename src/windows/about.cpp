@@ -1,16 +1,16 @@
 #include "about.h"
 
-AboutDialog::AboutDialog(): QDialog(0, Qt::WindowTitleHint | Qt::WindowSystemMenuHint | Qt::WindowCloseButtonHint)
-{
-    QWidget *mainwidget = new QWidget;
-    QVBoxLayout *textLayout = new QVBoxLayout(mainwidget);
-    QLabel *link = new QLabel;
+AboutDialog::AboutDialog()
+    : QDialog(0, Qt::WindowTitleHint | Qt::WindowSystemMenuHint | Qt::WindowCloseButtonHint) {
+    QWidget* mainwidget = new QWidget;
+    QVBoxLayout* textLayout = new QVBoxLayout(mainwidget);
+    QLabel* link = new QLabel;
 
     link->setText("<a href=\"https://github.com/RupertAvery/et3400/\">https://github.com/RupertAvery/et3400!</a>");
     link->setTextFormat(Qt::RichText);
     link->setTextInteractionFlags(Qt::TextBrowserInteraction);
     link->setOpenExternalLinks(true);
-    QLabel *title = new QLabel("ET-3400 Trainer Emulator");
+    QLabel* title = new QLabel("ET-3400 Trainer Emulator");
     title->setStyleSheet("QLabel { font-size:20px; font-weight: bold }");
     textLayout->addWidget(title);
     textLayout->addWidget(new QLabel("©2020 David Khristepher Santos"));
@@ -18,7 +18,7 @@ AboutDialog::AboutDialog(): QDialog(0, Qt::WindowTitleHint | Qt::WindowSystemMen
     textLayout->addWidget(link);
     mainwidget->setFixedHeight(150);
 
-    QVBoxLayout *mainLayout = new QVBoxLayout;
+    QVBoxLayout* mainLayout = new QVBoxLayout;
     mainLayout->addStretch(1);
     mainLayout->addWidget(mainwidget);
     mainLayout->addStretch(1);

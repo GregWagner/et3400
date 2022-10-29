@@ -1,10 +1,9 @@
 
 #include "keypad.h"
 
-Keypad::Keypad(QWidget *parent)
-    : QWidget(parent)
-{
-    QGridLayout *mainLayout = new QGridLayout;
+Keypad::Keypad(QWidget* parent)
+    : QWidget(parent) {
+    QGridLayout* mainLayout = new QGridLayout;
     mainLayout->setColumnStretch(0, 1);
     mainLayout->setColumnStretch(1, 1);
     mainLayout->setColumnStretch(2, 1);
@@ -32,17 +31,15 @@ Keypad::Keypad(QWidget *parent)
     setLayout(mainLayout);
 }
 
-Keypad::~Keypad()
-{
+Keypad::~Keypad() {
     delete device;
 }
 
-QPushButton *Keypad::create_button(QString name, QString icon, keypad_io::Keys key)
-{
-    QPushButton *button = new QPushButton(this);
+QPushButton* Keypad::create_button(QString name, QString icon, keypad_io::Keys key) {
+    QPushButton* button = new QPushButton(this);
     button->setObjectName(name);
     button->setFixedSize(QSize(37, 37));
-    //button->setGeometry(QRect(0, 0, 37, 37));
+    // button->setGeometry(QRect(0, 0, 37, 37));
     QIcon icon2;
     icon2.addFile(icon, QSize(), QIcon::Normal, QIcon::Off);
     button->setIcon(icon2);
@@ -54,13 +51,10 @@ QPushButton *Keypad::create_button(QString name, QString icon, keypad_io::Keys k
     return button;
 }
 
-
-void Keypad::press_key(keypad_io::Keys key)
-{
+void Keypad::press_key(keypad_io::Keys key) {
     device->press_key(key);
 }
 
-void Keypad::release_key(keypad_io::Keys key)
-{
+void Keypad::release_key(keypad_io::Keys key) {
     device->release_key(key);
 }

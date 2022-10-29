@@ -1,27 +1,24 @@
 #include "emu/et3400.h"
-#include <string>
-#include <stdio.h>
 #include <signal.h>
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <string>
 
 #ifdef _WIN32
 
 #include <windows.h>
 
-void gotoxy(int x, int y)
-{
-    COORD p = {x, y};
+void gotoxy(int x, int y) {
+    COORD p = { x, y };
     SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), p);
 }
 
 #else
 
-#include <unistd.h>
 #include <term.h>
+#include <unistd.h>
 
-void gotoxy(int x, int y)
-{
+void gotoxy(int x, int y) {
     int err;
     if (!cur_term)
         if (setupterm(NULL, STDOUT_FILENO, &err) == ERR)
@@ -31,11 +28,10 @@ void gotoxy(int x, int y)
 
 #endif
 
-et3400emu *emu;
+et3400emu* emu;
 
-void render_memory(et3400emu *emu);
+void render_memory(et3400emu* emu);
 
-void sigintHandler(int sig_num)
-{
+void sigintHandler(int sig_num) {
     emu->stop();
 }

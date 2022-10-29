@@ -1,7 +1,7 @@
 #include "remove_label.h"
 
-RemoveLabelDialog::RemoveLabelDialog() : QDialog(0, Qt::WindowTitleHint | Qt::WindowSystemMenuHint | Qt::WindowCloseButtonHint)
-{
+RemoveLabelDialog::RemoveLabelDialog()
+    : QDialog(0, Qt::WindowTitleHint | Qt::WindowSystemMenuHint | Qt::WindowCloseButtonHint) {
     setupUi(this);
 
     this->setStyleSheet("QLabel { font-size:12px; height: 20px }");
@@ -10,8 +10,7 @@ RemoveLabelDialog::RemoveLabelDialog() : QDialog(0, Qt::WindowTitleHint | Qt::Wi
     setWindowTitle("Renove Label");
 }
 
-void RemoveLabelDialog::setupUi(QDialog *Dialog)
-{
+void RemoveLabelDialog::setupUi(QDialog* Dialog) {
     mainLayout = new QVBoxLayout(this);
     mainLayout->setSpacing(10);
     mainLayout->setSizeConstraint(QLayout::SetDefaultConstraint);
@@ -42,12 +41,10 @@ void RemoveLabelDialog::setupUi(QDialog *Dialog)
 
 } // setupUi
 
-void RemoveLabelDialog::retranslateUi(QDialog *Dialog)
-{
+void RemoveLabelDialog::retranslateUi(QDialog* Dialog) {
 
 } // retranslateUi
 
-void RemoveLabelDialog::setLabel(QString text)
-{
+void RemoveLabelDialog::setLabel(QString text) {
     text_label->setText(QString("Are you sure you want to remove the label \"%1\"?").arg(text));
 }

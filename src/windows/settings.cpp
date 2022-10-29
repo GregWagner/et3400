@@ -1,16 +1,15 @@
 #include "settings.h"
 
-SettingsDialog::SettingsDialog()
-{
+SettingsDialog::SettingsDialog() {
 }
 
-SettingsDialog::SettingsDialog(QWidget *parent) : QDialog(parent, Qt::WindowTitleHint | Qt::WindowSystemMenuHint | Qt::WindowCloseButtonHint)
-{
+SettingsDialog::SettingsDialog(QWidget* parent)
+    : QDialog(parent, Qt::WindowTitleHint | Qt::WindowSystemMenuHint | Qt::WindowCloseButtonHint) {
 
     setFixedSize(QSize(350, 250));
     setWindowTitle("Settings");
 
-    QPushButton *reset_button = new QPushButton("Reset Clock", this);
+    QPushButton* reset_button = new QPushButton("Reset Clock", this);
     reset_button->setGeometry(250, 15, 80, 30);
 
     clock_rate_label = new QLabel("Clock Rate", this);
@@ -54,33 +53,24 @@ SettingsDialog::SettingsDialog(QWidget *parent) : QDialog(parent, Qt::WindowTitl
     // setLayout(mainLayout);
 }
 
-void SettingsDialog::setClockRate(int clock_rate)
-{
+void SettingsDialog::setClockRate(int clock_rate) {
     clock_rate_label->setText(QString("Clock Rate (%1)").arg(format((float)1000000 * clock_rate / 100)));
-    if (clock_rate < 20)
-    {
+    if (clock_rate < 20) {
         warning_label->show();
-    }
-    else
-    {
+    } else {
         warning_label->hide();
     }
 
     emu_ptr->set_clock_rate(clock_rate);
 }
 
-void SettingsDialog::set_emulator(et3400emu *emu)
-{
+void SettingsDialog::set_emulator(et3400emu* emu) {
     emu_ptr = emu;
     int clock_rate = emu_ptr->get_clock_rate();
     slider->setValue(clock_rate);
-    if (clock_rate < 20)
-    {
+    if (clock_rate < 20) {
         warning_label->show();
-    }
-    else
-    {
+    } else {
         warning_label->hide();
     }
 }
-

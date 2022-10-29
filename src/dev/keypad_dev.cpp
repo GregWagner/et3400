@@ -1,21 +1,17 @@
 #include "keypad_dev.h"
 
-keypad_io::keypad_io()
-{
+keypad_io::keypad_io() {
     next = NULL;
 }
 
-void keypad_io::init()
-{
+void keypad_io::init() {
     memory[C006] = 0xFF;
     memory[C005] = 0xFF;
     memory[C003] = 0xFF;
 }
 
-void keypad_io::press_key(Keys key)
-{
-    switch (key)
-    {
+void keypad_io::press_key(Keys key) {
+    switch (key) {
     // pull appropriate bit at mem location LOW
     case Key0:
         memory[C006] &= 0xDF;
@@ -71,17 +67,15 @@ void keypad_io::press_key(Keys key)
     }
 }
 
-void keypad_io::release_key(Keys key)
-{
+void keypad_io::release_key(Keys key) {
     // just pull everything high.
     // we're not monitoring multiple presses anyway
     memory[C003] = 0xFF;
     memory[C005] = 0xFF;
     memory[C006] = 0xFF;
-    switch (key)
-    {
+    switch (key) {
     case KeyReset: // RESET
-                   //device->reset_line = 0;
+                   // device->reset_line = 0;
         break;
     }
 }
@@ -91,32 +85,26 @@ void keypad_io::release_key(Keys key)
 //     emu_ptr = emu;
 // }
 
-uint8_t keypad_io::read(offs_t addr)
-{
+uint8_t keypad_io::read(offs_t addr) {
     return memory[addr - 0xC003];
 };
 
-void keypad_io::write(offs_t addr, uint8_t data){
+void keypad_io::write(offs_t addr, uint8_t data) {
 
 };
 
-bool keypad_io::is_mapped(offs_t addr)
-{
+bool keypad_io::is_mapped(offs_t addr) {
     return addr >= 0xC003 && addr <= 0xC006;
 }
 
-
-uint8_t *keypad_io::get_mapped_memory()
-{
-	return memory;
+uint8_t* keypad_io::get_mapped_memory() {
+    return memory;
 }
 
-offs_t keypad_io::get_start()
-{
-	return 0xC003;
+offs_t keypad_io::get_start() {
+    return 0xC003;
 }
 
-offs_t keypad_io::get_end()
-{
-	return 0xC006;
+offs_t keypad_io::get_end() {
+    return 0xC006;
 }

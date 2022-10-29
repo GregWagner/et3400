@@ -1,11 +1,11 @@
 #ifndef DISASSEMBLY_BUILDER_H
 #define DISASSEMBLY_BUILDER_H
 
-#include <vector>
-#include "label.h"
 #include "../common/common_defs.h"
 #include "../dasm/disassembler.h"
+#include "label.h"
 #include <QString>
+#include <vector>
 
 enum DisassemblyType {
     Comment,
@@ -14,8 +14,7 @@ enum DisassemblyType {
     Empty
 };
 
-struct DisassemblyLine
-{
+struct DisassemblyLine {
     offs_t address;
     DisassemblyType type;
     QString opcodes;
@@ -25,12 +24,12 @@ struct DisassemblyLine
     int bytes;
 };
 
-class DisassemblyBuilder
-{
+class DisassemblyBuilder {
 public:
-    static void build(std::vector<DisassemblyLine>* lines, offs_t start, offs_t end, uint8_t *memory, std::vector<Label> *labels);
+    static void build(std::vector<DisassemblyLine>* lines, offs_t start, offs_t end, uint8_t* memory, std::vector<Label>* labels);
+
 private:
-    static void disassemble(std::vector<DisassemblyLine>* lines, uint8_t* memory, int& ptr, offs_t &address, Label* label);
+    static void disassemble(std::vector<DisassemblyLine>* lines, uint8_t* memory, int& ptr, offs_t& address, Label* label);
 };
 
 #endif // DISASSEMBLY_BUILDER_H

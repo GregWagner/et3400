@@ -2,22 +2,20 @@
 #define BREAKPOINT_H
 
 #include "../common/common_defs.h"
-#include <vector>
+#include <QFile>
 #include <QString>
 #include <QTextStream>
-#include <QFile>
+#include <vector>
 
-struct Breakpoint
-{
+struct Breakpoint {
     offs_t address;
     bool is_enabled;
 };
 
-class BreakpointReader
-{
+class BreakpointReader {
 public:
-    static std::vector<Breakpoint> *Read(QString path, bool &success);
-    static void Write(QString path, std::vector<Breakpoint> *breakpoints, bool &success);
+    static std::vector<Breakpoint>* Read(QString path, bool& success);
+    static void Write(QString path, std::vector<Breakpoint>* breakpoints, bool& success);
 };
 
 #endif // BREAKPOINT_H

@@ -1,23 +1,21 @@
 #ifndef SREC_H
 #define SREC_H
 
-#include <QString>
 #include <QFile>
+#include <QString>
 #include <QTextStream>
 #include <vector>
 
-struct srec_block
-{
+struct srec_block {
     int bytecount;
     int address;
-    uint8_t *data;
+    uint8_t* data;
 };
 
-class SrecReader
-{
+class SrecReader {
 public:
-    static bool Read(QString file, std::vector<srec_block> *blocks);
-    static bool Write(QString file, std::vector<srec_block> *blocks);
+    static bool Read(QString file, std::vector<srec_block>* blocks);
+    static bool Write(QString file, std::vector<srec_block>* blocks);
 };
 
 #endif // SREC_H

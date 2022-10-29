@@ -6,32 +6,31 @@
 #include <QPixmap>
 #include <QWidget>
 // #include <QTimer>
-#include <QAction>
 #include "../dev/display_dev.h"
+#include <QAction>
 
-class Display : public QWidget
-{
+class Display : public QWidget {
     Q_OBJECT
 
 public:
-    explicit Display(QWidget *parent = nullptr);
+    explicit Display(QWidget* parent = nullptr);
     ~Display();
-    display_io *device;
+    display_io* device;
     void update_display();
 
 public slots:
     void redraw();
 
 protected:
-    void paintEvent(QPaintEvent *event) override;
+    void paintEvent(QPaintEvent* event) override;
 
 private:
     QPixmap hr[2];
     QPixmap vt[2];
     QPixmap dp[2];
-    QAction *action;
+    QAction* action;
     bool running;
-    //QTimer *m_paintTimer;
+    // QTimer *m_paintTimer;
 };
 
 #endif // DISPLAY_H

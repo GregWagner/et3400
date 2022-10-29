@@ -2,39 +2,36 @@
 #define MEMORY_VIEW_H
 
 //#include <thread>
-#include <QTimer>
-#include <QWidget>
+#include <QAction>
+#include <QBrush>
+#include <QFont>
 #include <QFrame>
+#include <QGridLayout>
 #include <QPainter>
 #include <QPainterPath>
-#include <QBrush>
 #include <QPen>
 #include <QPixmap>
-#include <QGridLayout>
 #include <QScrollBar>
-#include <QAction>
-#include <QFont>
+#include <QTimer>
 #include <QWheelEvent>
+#include <QWidget>
 
-#include "../emu/et3400.h"
-#include "../dev/memory_map.h"
 #include "../common/common_defs.h"
+#include "../dev/memory_map.h"
+#include "../emu/et3400.h"
 
-
-
-class MemoryView : public QFrame
-{
+class MemoryView : public QFrame {
     Q_OBJECT
 
 public:
     MemoryView();
-    MemoryView(QWidget *parent);
+    MemoryView(QWidget* parent);
     ~MemoryView();
     void update_display();
     void scroll(int steps);
     void scrollTo(int value);
-    void set_emulator(et3400emu *emu);
-    void set_range(offs_t start, offs_t end, uint8_t *memory);
+    void set_emulator(et3400emu* emu);
+    void set_range(offs_t start, offs_t end, uint8_t* memory);
 
 signals:
     void on_scroll(int steps);
@@ -44,22 +41,22 @@ public slots:
     void redraw();
 
 protected:
-    void paintEvent(QPaintEvent *event) override;
-    void wheelEvent(QWheelEvent *event) override;
-    void resizeEvent(QResizeEvent *event) override;
+    void paintEvent(QPaintEvent* event) override;
+    void wheelEvent(QWheelEvent* event) override;
+    void resizeEvent(QResizeEvent* event) override;
 
 private:
-    QScrollBar *scrollbar;
-    QAction *action;
-    QPixmap *buffer;
-    QTimer *m_paintTimer;
+    QScrollBar* scrollbar;
+    QAction* action;
+    QPixmap* buffer;
+    QTimer* m_paintTimer;
 
-    et3400emu *emu_ptr;
+    et3400emu* emu_ptr;
 
     bool running;
     offs_t start;
     offs_t end;
-    uint8_t *memory;
+    uint8_t* memory;
 
     bool is_memory_set;
     int offset;

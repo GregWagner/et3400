@@ -4,9 +4,8 @@
 #include <QPainter>
 #include <QPainterPath>
 
-Display::Display(QWidget *parent)
-    : QWidget(parent)
-{
+Display::Display(QWidget* parent)
+    : QWidget(parent) {
     hr[0].load(":/images/hr_off.png");
     hr[1].load(":/images/hr_on.png");
     vt[0].load(":/images/vt_off.png");
@@ -29,15 +28,13 @@ Display::Display(QWidget *parent)
     this->setFixedSize(QSize(320, 85));
 }
 
-Display::~Display()
-{
+Display::~Display() {
     delete (action);
 }
 
-void Display::paintEvent(QPaintEvent * /* event */)
-{
+void Display::paintEvent(QPaintEvent* /* event */) {
     QPainter painter(this);
-    QString letters[] = {"H", "I", "N", "Z", "V", "C"};
+    QString letters[] = { "H", "I", "N", "Z", "V", "C" };
     // Clear display
     painter.setBrush(QBrush(Qt::black));
 
@@ -60,11 +57,9 @@ void Display::paintEvent(QPaintEvent * /* event */)
     // painter.restore();
 
     painter.save();
-    for (int address = 0xC16F; address >= 0xC110; address--)
-    {
+    for (int address = 0xC16F; address >= 0xC110; address--) {
         // prevent writing on all addresses, minor performance increase
-        if ((address & 0x08) != 0x08)
-        {
+        if ((address & 0x08) != 0x08) {
 
             int position = 6 - ((address & 0xF0) >> 4);
             int segment = address & 0x7;
@@ -75,8 +70,7 @@ void Display::paintEvent(QPaintEvent * /* event */)
 
             uint8_t state = segdata & 1;
 
-            switch (segment)
-            {
+            switch (segment) {
             case 0:
                 painter.drawPixmap(11, 23, hr[state]);
                 break;
@@ -115,12 +109,10 @@ void Display::paintEvent(QPaintEvent * /* event */)
     painter.end();
 }
 
-void Display::redraw()
-{
+void Display::redraw() {
     this->update();
 }
 
-void Display::update_display()
-{
+void Display::update_display() {
     action->trigger();
 }

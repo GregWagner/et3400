@@ -1,13 +1,12 @@
 #ifndef ABOUT_H
 #define ABOUT_H
 #include <QDialog>
-#include <QWidget>
 #include <QGridLayout>
-#include <QVBoxLayout>
 #include <QLabel>
+#include <QVBoxLayout>
+#include <QWidget>
 
-class AboutDialog : public QDialog
-{
+class AboutDialog : public QDialog {
     Q_OBJECT
 
 public:

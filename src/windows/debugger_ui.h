@@ -4,9 +4,8 @@
 #include "debugger.h"
 #include "label.h"
 
-void DebuggerDialog::setupUI()
-{
-    QToolBar *toolbar = new QToolBar(this);
+void DebuggerDialog::setupUI() {
+    QToolBar* toolbar = new QToolBar(this);
 
     // QLabel *memory_label = new QLabel("Memory");
     // memory_label->setStyleSheet("margin: 0px 5px 0px 5px;");
@@ -19,12 +18,12 @@ void DebuggerDialog::setupUI()
     labels_selector->setText("Labels   ");
     labels_selector->setPopupMode(QToolButton::ToolButtonPopupMode::InstantPopup);
 
-    add_label_action = new QAction("Add Label", this); 
+    add_label_action = new QAction("Add Label", this);
     connect(add_label_action, &QAction::triggered, this, &DebuggerDialog::add_label);
 
     MakeTriggeredAction(goto_label_action, "Goto Label", Qt::CTRL + Qt::Key_G, goto_label);
 
-    QMenu *labels_selector_menu = new QMenu(labels_selector);
+    QMenu* labels_selector_menu = new QMenu(labels_selector);
     labels_selector_menu->addAction(add_label_action);
     labels_selector_menu->addAction(goto_label_action);
     labels_selector->setMenu(labels_selector_menu);
@@ -39,7 +38,7 @@ void DebuggerDialog::setupUI()
     panel_selector->setText("Panels   ");
     panel_selector->setPopupMode(QToolButton::ToolButtonPopupMode::InstantPopup);
 
-    QMenu *panel_selector_menu = new QMenu(panel_selector);
+    QMenu* panel_selector_menu = new QMenu(panel_selector);
 
     // MakeAction(toggle_disassembly_action, "Disassembly", Qt::CTRL + Qt::Key_2, toggle_disassembly_panel);
     MakeToggledAction(toggle_memory_action, "Memory", Qt::CTRL + Qt::Key_M, toggle_memory_panel);
@@ -50,24 +49,24 @@ void DebuggerDialog::setupUI()
     // panel_selector_menu->addAction(toggle_status_action);
     panel_selector->setMenu(panel_selector_menu);
 
-    QAction *openRam_action = new QAction("&Load RAM", this);
+    QAction* openRam_action = new QAction("&Load RAM", this);
     openRam_action->setShortcut(Qt::CTRL + Qt::Key_O);
 
-    QAction *saveRam_action = new QAction("&Save RAM", this);
+    QAction* saveRam_action = new QAction("&Save RAM", this);
     saveRam_action->setShortcut(Qt::CTRL + Qt::Key_S);
 
-    QAction *openBrk_action = new QAction("Load Breakpoints", this);
-    QAction *saveBrk_action = new QAction("Save Breakpoints", this);
+    QAction* openBrk_action = new QAction("Load Breakpoints", this);
+    QAction* saveBrk_action = new QAction("Save Breakpoints", this);
 
-    QAction *openMap_action = new QAction("Load Labels (RAM)", this);
-    QAction *saveMap_action = new QAction("Save Labels (RAM)", this);
+    QAction* openMap_action = new QAction("Load Labels (RAM)", this);
+    QAction* saveMap_action = new QAction("Save Labels (RAM)", this);
 
-    QToolButton *file_button = new QToolButton(toolbar);
+    QToolButton* file_button = new QToolButton(toolbar);
     file_button->setToolButtonStyle(Qt::ToolButtonTextOnly);
     file_button->setText("File   ");
     file_button->setPopupMode(QToolButton::ToolButtonPopupMode::InstantPopup);
 
-    QMenu *file_menu = new QMenu(file_button);
+    QMenu* file_menu = new QMenu(file_button);
     file_menu->addAction(openRam_action);
     file_menu->addAction(saveRam_action);
     file_menu->addSeparator();
@@ -115,14 +114,14 @@ void DebuggerDialog::setupUI()
     memory_selector->addItem("TinyBasic ROM", 0x1C00);
     memory_selector->addItem("Monitor ROM", 0xFC00);
 
-    QWidget *inner_memory = new QWidget(memory_groupBox);
-    QHBoxLayout *memory_groupBox_layout = new QHBoxLayout(inner_memory);
+    QWidget* inner_memory = new QWidget(memory_groupBox);
+    QHBoxLayout* memory_groupBox_layout = new QHBoxLayout(inner_memory);
     memory_groupBox_layout->addWidget(memory_view);
     memory_groupBox_layout->addWidget(memory_scrollbar);
     memory_groupBox_layout->setMargin(0);
     inner_memory->setLayout(memory_groupBox_layout);
 
-    QVBoxLayout *memory_groupBox_layout_v = new QVBoxLayout(this);
+    QVBoxLayout* memory_groupBox_layout_v = new QVBoxLayout(this);
     memory_groupBox_layout_v->addWidget(memory_selector);
     memory_groupBox_layout_v->addWidget(inner_memory);
     memory_groupBox->setLayout(memory_groupBox_layout_v);
@@ -133,33 +132,33 @@ void DebuggerDialog::setupUI()
     disassembly_selector->addItem("TinyBasic ROM", 0x1C00);
     disassembly_selector->addItem("Monitor ROM", 0xFC00);
 
-    QWidget *inner_disassembly = new QWidget(disassembly_groupBox);
-    QHBoxLayout *disassembly_groupBox_layout = new QHBoxLayout(this);
+    QWidget* inner_disassembly = new QWidget(disassembly_groupBox);
+    QHBoxLayout* disassembly_groupBox_layout = new QHBoxLayout(this);
     disassembly_groupBox_layout->addWidget(disassembly_view);
     disassembly_groupBox_layout->addWidget(disassembly_scrollbar);
     disassembly_groupBox_layout->setMargin(0);
     inner_disassembly->setLayout(disassembly_groupBox_layout);
 
-    QVBoxLayout *disassembly_groupBox_layout_v = new QVBoxLayout(this);
+    QVBoxLayout* disassembly_groupBox_layout_v = new QVBoxLayout(this);
     disassembly_groupBox_layout_v->addWidget(disassembly_selector);
     disassembly_groupBox_layout_v->addWidget(inner_disassembly);
     disassembly_groupBox->setLayout(disassembly_groupBox_layout_v);
 
-    QHBoxLayout *status_groupBox_layout = new QHBoxLayout(this);
+    QHBoxLayout* status_groupBox_layout = new QHBoxLayout(this);
     status_groupBox_layout->addWidget(status_view);
     status_groupBox_layout->setMargin(10);
     status_groupBox->setLayout(status_groupBox_layout);
     status_groupBox->setFixedWidth(177);
 
-    QWidget *panels = new QWidget(this);
-    QHBoxLayout *panels_layout = new QHBoxLayout(this);
+    QWidget* panels = new QWidget(this);
+    QHBoxLayout* panels_layout = new QHBoxLayout(this);
     panels_layout->addWidget(disassembly_groupBox);
     panels_layout->addWidget(memory_groupBox);
     panels_layout->addWidget(status_groupBox);
     panels_layout->setMargin(10);
     panels->setLayout(panels_layout);
 
-    QVBoxLayout *mainLayout = new QVBoxLayout(this);
+    QVBoxLayout* mainLayout = new QVBoxLayout(this);
     mainLayout->addWidget(toolbar);
     mainLayout->addWidget(panels);
     mainLayout->setMargin(0);
@@ -195,7 +194,7 @@ void DebuggerDialog::setupUI()
 
     resize(QSize(985, 721));
 
-    //setFixedSize(QSize(985, 721));
+    // setFixedSize(QSize(985, 721));
     setWindowTitle("Debugger");
 }
 

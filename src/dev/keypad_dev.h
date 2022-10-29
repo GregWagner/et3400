@@ -4,11 +4,9 @@
 #include "memory_mapped_device.h"
 #include <functional>
 
-class keypad_io : public memory_mapped_device
-{
+class keypad_io : public memory_mapped_device {
 public:
-    enum Keys
-    {
+    enum Keys {
         Key0,
         Key1,
         Key2,
@@ -33,21 +31,20 @@ public:
     uint8_t read(offs_t addr) override;
     void write(offs_t addr, uint8_t data) override;
     bool is_mapped(offs_t addr) override;
-    uint8_t *get_mapped_memory() override;
+    uint8_t* get_mapped_memory() override;
     offs_t get_start() override;
     offs_t get_end() override;
 
     void init();
     void press_key(Keys key);
     void release_key(Keys key);
-	std::function<void()> on_reset_press;
+    std::function<void()> on_reset_press;
     const int C006 = 3;
     const int C005 = 2;
     const int C003 = 0;
-
 
 private:
     uint8_t memory[4];
 };
 
-#endif //KEYPAD_DEV_H
+#endif // KEYPAD_DEV_H

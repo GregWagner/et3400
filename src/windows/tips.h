@@ -1,30 +1,29 @@
 #ifndef TIPS_H
 #define TIPS_H
 
-#include "stdlib.h"
 #include "../util/settings.h"
+#include "stdlib.h"
 
-#include <QDialog>
-#include <QVBoxLayout>
-#include <QPushButton>
 #include <QAction>
+#include <QCheckBox>
+#include <QDialog>
 #include <QLabel>
+#include <QPushButton>
 #include <QSize>
 #include <QSpacerItem>
-#include <QCheckBox>
+#include <QVBoxLayout>
 
-class Tips : public QDialog
-{
+class Tips : public QDialog {
     Q_OBJECT
 
 public:
-    Tips(QWidget *parent);
-    void set_settings(Settings *settings);
+    Tips(QWidget* parent);
+    void set_settings(Settings* settings);
 
 private:
     int tip;
-    Settings *settings;
-    QCheckBox *show_tip_checkbox;
+    Settings* settings;
+    QCheckBox* show_tip_checkbox;
 
     static const int TIPCOUNT = 16;
 
@@ -49,7 +48,7 @@ private:
         QString("You can resize the Debugger by dragging the bottom-right corner of the window."),
         // 15
         QString("<p>To remove a Comment label, right-click on the label, or on the instruction under the label, and select <b>Remove Label</b></p><p>To remove a Data label, right-click on the label, or on the range included in the label, and select <b>Remove Label</b></p>"),
-        };
+    };
 };
 
 #endif // TIPS_H

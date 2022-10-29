@@ -1,10 +1,9 @@
-#include <QDebug>
 #include "status_view.h"
 #include "../emu/et3400.h"
+#include <QDebug>
 
-StatusView::StatusView(QWidget *parent)
-    : QFrame(parent)
-{
+StatusView::StatusView(QWidget* parent)
+    : QFrame(parent) {
     setFrameStyle(QFrame::StyledPanel | QFrame::Sunken);
     setLineWidth(3);
 
@@ -23,7 +22,7 @@ StatusView::StatusView(QWidget *parent)
     acca_label = new QLabel;
     accb_label = new QLabel;
     cc_label = new QLabel;
-    QLabel *bits_label = new QLabel("--HINZVC");
+    QLabel* bits_label = new QLabel("--HINZVC");
     pc_label->setStyleSheet(style);
     sp_label->setStyleSheet(style);
     ix_label->setStyleSheet(style);
@@ -32,7 +31,7 @@ StatusView::StatusView(QWidget *parent)
     cc_label->setStyleSheet(style);
     bits_label->setStyleSheet(bits_style);
 
-    QGridLayout *mainLayout = new QGridLayout;
+    QGridLayout* mainLayout = new QGridLayout;
     mainLayout->setColumnStretch(0, 1);
     mainLayout->setColumnStretch(1, 1);
     mainLayout->setRowStretch(0, 1);
@@ -65,16 +64,13 @@ StatusView::StatusView(QWidget *parent)
     setLineWidth(3);
 }
 
-StatusView::~StatusView()
-{
+StatusView::~StatusView() {
     m_paintTimer->stop();
     delete m_paintTimer;
 }
 
-void StatusView::update()
-{
-    if (is_emulator_set)
-    {
+void StatusView::update() {
+    if (is_emulator_set) {
         QChar filler = QLatin1Char('0');
         CpuStatus status = emu_ptr->get_status();
         pc_label->setText(QString("%1").arg(status.pc, 4, 16, filler).toUpper());
@@ -94,8 +90,7 @@ void StatusView::update()
     }
 }
 
-void StatusView::set_emulator(et3400emu *emu)
-{
+void StatusView::set_emulator(et3400emu* emu) {
     emu_ptr = emu;
     is_emulator_set = true;
 }

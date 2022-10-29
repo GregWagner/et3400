@@ -1,8 +1,8 @@
 #include "settings.h"
 
 #include <QDebug>
-#include <QString>
 #include <QDir>
+#include <QString>
 #include <QStringList>
 
 #ifdef _WIN32
@@ -10,18 +10,16 @@
 #endif //_WIN32
 
 #ifdef _WINDOWS_
-#include <windows.h>
-#include <wchar.h>
 #include <KnownFolders.h>
 #include <shlobj.h>
+#include <wchar.h>
+#include <windows.h>
 
-QString getSettingsPath(bool &success)
-{
+QString getSettingsPath(bool& success) {
     QString spath;
     PWSTR path = NULL;
     HRESULT hr = SHGetKnownFolderPath(FOLDERID_RoamingAppData, 0, NULL, &path);
-    if (SUCCEEDED(hr))
-    {
+    if (SUCCEEDED(hr)) {
         spath = QString("%1").arg(path) + QDir::separator() + QString("ET3400") + QDir::separator() + QString("settings.ini");
     }
     CoTaskMemFree(path);
@@ -30,48 +28,39 @@ QString getSettingsPath(bool &success)
 
 #else
 
-QString getSettingsPath(bool &success)
-{
+QString getSettingsPath(bool& success) {
     success = true;
     return QString("~/.config/et3400/settings.ini");
 }
 
 #endif
 
-Settings load_settings()
-{
+Settings load_settings() {
 
-    Settings settings{ false, false };
+    Settings settings { false, false };
 
     bool success;
     QString settingsFile = getSettingsPath(success);
 
-    if (success)
-    {
+    if (success) {
         qDebug() << settingsFile;
 
         QFile file(settingsFile);
-        if (!file.open(QIODevice::ReadOnly))
-        {
-            //QMessageBox::information(0, "error", file.errorString());
-            return Settings{true};
+        if (!file.open(QIODevice::ReadOnly)) {
+            // QMessageBox::information(0, "error", file.errorString());
+            return Settings { true };
         }
 
         QTextStream in(&file);
 
-        while (!in.atEnd())
-        {
+        while (!in.atEnd()) {
             QString line = in.readLine();
 
-            if (line.length() > 0)
-            {
+            if (line.length() > 0) {
                 QStringList list1 = line.split(QLatin1Char('='));
-                if (list1.at(0) == "ShowTips" && list1.at(1) == "true")
-                {
+                if (list1.at(0) == "ShowTips" && list1.at(1) == "true") {
                     settings.showTips = true;
-                }
-                else if (list1.at(0) == "ShowMemoryView" && list1.at(1) == "true")
-                {
+                } else if (list1.at(0) == "ShowMemoryView" && list1.at(1) == "true") {
                     settings.showMemoryView = true;
                 }
                 qDebug() << list1;
@@ -84,14 +73,12 @@ Settings load_settings()
     return settings;
 };
 
-void save_settings(Settings *settings)
-{
+void save_settings(Settings* settings) {
     bool success;
     QString settingsFile = getSettingsPath(success);
     qDebug() << "Get path: " << success;
 
-    if (success)
-    {
+    if (success) {
         qDebug() << "Saving settings to " << settingsFile;
 
         QFileInfo fi(settingsFile);
@@ -105,9 +92,8 @@ void save_settings(Settings *settings)
             dir.mkpath(settingsPath); // You can check the success if needed
 
         QFile file(settingsFile);
-        if (!file.open(QIODevice::WriteOnly | QFile::Truncate))
-        {
-            //QMessageBox::information(0, "error", file.errorString());
+        if (!file.open(QIODevice::WriteOnly | QFile::Truncate)) {
+            // QMessageBox::information(0, "error", file.errorString());
             return;
         }
 

@@ -1,15 +1,14 @@
-#include <QDebug>
 #include "windows/mainwindow.h"
 #include <QApplication>
+#include <QDebug>
 
-int main(int argc, char* argv[])
-{
-	QApplication app(argc, argv);
+int main(int argc, char* argv[]) {
+    QApplication app(argc, argv);
 
-	MainWindow window;
+    MainWindow window;
 
-	window.setWindowTitle("ET-3400 Emulator");
-	window.show();
+    window.setWindowTitle("ET-3400 Emulator");
+    window.show();
 
-	return app.exec();
+    return app.exec();
 }
